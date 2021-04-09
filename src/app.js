@@ -26,8 +26,11 @@ class App extends React.Component {
       data: date,
       success: function(data) {
         console.log(data)
+        // if (data.thumbnail_url) {
+
+        // }
         that.setState({
-          img: data.url,
+          img: data.thumbnail_url || data.url,
           date: data.date,
           explanation: data.explanation,
           title: data.title

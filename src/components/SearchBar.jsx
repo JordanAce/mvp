@@ -24,18 +24,20 @@ class SearchBar extends React.Component {
     this.props.onSearch(this.state.date);
   }
 
+
+
   render() {
   return(
-    <div>
-    <input
-    type = "date"
-    min ="1995-12-31"
-    key = "uniquekey"
-    value = {this.state.term}
-    placeholder={"Search DATE Year-Month-Date"}
-    onChange = {(event) => this.newEntry(event.target.value)}
+    <div className = 'search'>
+      <input
+        type = "date"
+        min ="1995-12-31"
+        key = "uniquekey"
+        value = {this.state.term}
+        placeholder={"Search DATE Year-Month-Date"}
+        onChange = {(event) => this.newEntry(event.target.value)}
     />
-    <button onClick = {this.search}>See Past PICS of the DAY</button>
+      <button onClick = {this.search}>See Past PICS of the DAY</button>
     </div>
 
     );
