@@ -35,7 +35,7 @@ class SearchBar extends React.Component {
     placeholder={"Search DATE Year-Month-Date"}
     onChange = {(event) => this.newEntry(event.target.value)}
     />
-    <button onClick = {this.search}>Get PIC of the DAY</button>
+    <button onClick = {this.search}>See Past PICS of the DAY</button>
     </div>
 
     );

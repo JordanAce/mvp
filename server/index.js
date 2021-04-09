@@ -12,7 +12,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 app.post('/constellations', function(req, res) {
-  console.log('REQUEST', req.body);
+  let date = Object.keys(req.body)[0];
+  console.log('REQUEST', date);
+  if (date) {
+    return API_CALL.getNasaDataWithDate(date)
+    .then((data) => {
+      console.log('SUCCESSFUL POST SERVER', data);
+      res.send(data);
+      res.end();
+    })
+    .catch((error) => {
+      console.log('ERROR ON POST SERVER', error)
+    });
+  } else {
   return API_CALL.getNasaData()
   .then((data) => {
     console.log('SUCCESSFUL POST SERVER', data);
@@ -22,6 +34,7 @@ app.post('/constellations', function(req, res) {
   .catch((error) => {
     console.log('ERROR ON POST SERVER', error)
   });
+  }
 });
 
 

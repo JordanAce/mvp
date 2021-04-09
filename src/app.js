@@ -12,23 +12,25 @@ class App extends React.Component {
     this.state = {
       img: '',
       date:'',
-      explanation: ''
+      explanation: '',
+      title: ''
     }
   }
   search(input) {
     let that = this;
-    let data = input;
-    console.log(`${data} was searched`)
+    let date = input;
+    console.log(`${date} was searched`)
       $.ajax({
       type: 'POST',
       url: ('/constellations'),
-      data: data,
+      data: date,
       success: function(data) {
         console.log(data)
         that.setState({
           img: data.url,
           date: data.date,
-          explanation: data.explanation
+          explanation: data.explanation,
+          title: data.title
         });
       },
       error: function (error) {
