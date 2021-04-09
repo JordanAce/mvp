@@ -37,15 +37,32 @@ class App extends React.Component {
     })
   }
 
-  componentDidMount() {
-    // this.setState({
-    //   constellation : data
-    // })
+  componentDidMount(input) {
+    let that = this;
+    let data = input;
+    console.log(`${data} was searched`)
+      $.ajax({
+      type: 'POST',
+      url: ('/constellations'),
+      data: data,
+      success: function(data) {
+        console.log(data)
+        that.setState({
+          img: data.url,
+          date: data.date,
+          explanation: data.explanation,
+          title: data.title
+        });
+      },
+      error: function (error) {
+        console.log('ERROR ON POST REQUEST', error)
+      }
+    })
   }
   render () {
     return (
       <div>
-        <h1>That's Stellar</h1>
+        <h1 class = "title">{this.state.title}</h1><br></br>
         <ConstellationList img ={this.state.img} date = {this.state.date} explanation ={this.state.explanation}/>
         <Search onSearch = {this.search.bind(this)}/>
       </div>

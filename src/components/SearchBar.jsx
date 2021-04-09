@@ -27,14 +27,13 @@ class SearchBar extends React.Component {
   render() {
   return(
     <div>
-    <h1>Enter your ZIP CODE</h1>
     <input
     key = "uniquekey"
     value = {this.state.term}
-    placeholder={"Search ZIP Code"}
+    placeholder={"Search DATE Year-Month-Date"}
     onChange = {(event) => this.newEntry(event.target.value)}
     />
-    <button onClick = {this.search}>Search for Constellations</button>
+    <button onClick = {this.search}>Get PIC of the DAY</button>
     </div>
 
     );
