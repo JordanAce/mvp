@@ -10,7 +10,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      constellation: ''
+      img: '',
+      date:'',
+      explanation: ''
     }
   }
   search(input) {
@@ -24,7 +26,9 @@ class App extends React.Component {
       success: function(data) {
         console.log(data)
         that.setState({
-          constellation: data
+          img: data.url,
+          date: data.date,
+          explanation: data.explanation
         });
       },
       error: function (error) {
@@ -41,8 +45,8 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <h1>MVP APP REACT</h1>
-        <ConstellationList value ={this.state.constellation}/>
+        <h1>That's Stellar</h1>
+        <ConstellationList img ={this.state.img} date = {this.state.date} explanation ={this.state.explanation}/>
         <Search onSearch = {this.search.bind(this)}/>
       </div>
     )  }
