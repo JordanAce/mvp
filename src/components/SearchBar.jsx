@@ -2,9 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 
-
-
-
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -12,10 +9,19 @@ class SearchBar extends React.Component {
       term: ''
     }
     this.search= this.search.bind(this);
+    this.onChange= this.newEntry.bind(this);
+  }
+
+
+  newEntry(event) {
+    this.setState({
+      term: event
+    });
   }
 
   search() {
-    console.log('SEARCHING API')
+    console.log(`SEARCHING ${this.state.term}`)
+    this.props.onSearch(this.state.term);
   }
 
   render() {
@@ -26,7 +32,7 @@ class SearchBar extends React.Component {
     key = "uniquekey"
     value = {this.state.term}
     placeholder={"Search ZIP Code"}
-    onChange = {(event) => newEntry(event.target.value)}
+    onChange = {(event) => this.newEntry(event.target.value)}
     />
     <button onClick = {this.search}>Search for Constellations</button>
     </div>
