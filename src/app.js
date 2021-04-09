@@ -62,7 +62,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <h1 class = "title">{this.state.title}</h1><br></br>
+        <h1 className = "title">{this.state.title}</h1><br></br>
         <ConstellationList img ={this.state.img} date = {this.state.date} explanation ={this.state.explanation}/>
         <Search onSearch = {this.search.bind(this)}/>
       </div>

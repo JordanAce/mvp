@@ -6,7 +6,7 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      term: ''
+      date: ''
     }
     this.search= this.search.bind(this);
     this.onChange= this.newEntry.bind(this);
@@ -15,19 +15,21 @@ class SearchBar extends React.Component {
 
   newEntry(event) {
     this.setState({
-      term: event
+      date: event
     });
   }
 
   search() {
-    console.log(`SEARCHING ${this.state.term}`)
-    this.props.onSearch(this.state.term);
+    console.log(`SEARCHING ${this.state.date}`)
+    this.props.onSearch(this.state.date);
   }
 
   render() {
   return(
     <div>
     <input
+    type = "date"
+    min ="1995-12-31"
     key = "uniquekey"
     value = {this.state.term}
     placeholder={"Search DATE Year-Month-Date"}
