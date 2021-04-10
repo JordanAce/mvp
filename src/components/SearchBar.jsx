@@ -10,6 +10,7 @@ class SearchBar extends React.Component {
     }
     this.search= this.search.bind(this);
     this.onChange= this.newEntry.bind(this);
+    this.setFavorite = this.setFavorite.bind(this);
   }
 
 
@@ -24,11 +25,15 @@ class SearchBar extends React.Component {
     this.props.onSearch(this.state.date);
   }
 
+  setFavorite() {
+    console.log(`SETTING AS FAVORITE ${this.state.date}`)
+    this.props.setFavorite(this.state.date);
+  }
 
 
   render() {
   return(
-    <div className = 'search'>
+    <div className = 'search' style ={{clear: 'both'}}>
       <input
         type = "date"
         min ="1995-12-31"
@@ -38,6 +43,7 @@ class SearchBar extends React.Component {
         onChange = {(event) => this.newEntry(event.target.value)}
     />
       <button onClick = {this.search}>See Past PICS of the DAY</button>
+      <button id = "favorite" style ={{float: 'right'}} onClick = {this.setFavorite}>Set as Favorite</button>
     </div>
 
     );

@@ -17,6 +17,7 @@ class App extends React.Component {
     }
   }
   search(input) {
+    //on date input API call for relevent's date's pic of the day
     let that = this;
     let date = input;
     console.log(`${date} was searched`)
@@ -26,9 +27,6 @@ class App extends React.Component {
       data: date,
       success: function(data) {
         console.log(data)
-        // if (data.thumbnail_url) {
-
-        // }
         that.setState({
           img: data.thumbnail_url || data.url,
           date: data.date,
@@ -42,10 +40,26 @@ class App extends React.Component {
     })
   }
 
+  setFavorite(date) {
+    //POST Request to Server which saves the DB favorites
+    $.ajax({
+      type: 'POST',
+      url: ('/favorites'),
+      data: date,
+      success: function() {
+        console.log(`${date} was Favorited`);
+      },
+      error: function (error) {
+        console.log('ERROR ON POST REQUEST', error)
+      }
+    })
+  }
+
   componentDidMount(input) {
+    //on load of screen API Call for Pic of the day
     let that = this;
     let data = input;
-    console.log(`${data} was searched`)
+    console.log(`${data} was Searched`)
       $.ajax({
       type: 'POST',
       url: ('/constellations'),
@@ -69,7 +83,7 @@ class App extends React.Component {
       <div>
         <h1 className = "title">{this.state.title}</h1><br></br>
         <ConstellationList img ={this.state.img} date = {this.state.date} explanation ={this.state.explanation}/>
-        <Search onSearch = {this.search.bind(this)}/>
+        <Search onSearch = {this.search.bind(this)} setFavorite = {this.setFavorite.bind(this)} style = 'align:center'/>
       </div>
     )  }
 

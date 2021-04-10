@@ -4,6 +4,7 @@ const API_CALL = require ('../API_CALL/nasa.js');
 const bodyParser = require('body-parser');
 const port = 8080;
 const path = require('path');
+const db = require ('../database/index.js');
 
 
 app.use(express.static(path.join(__dirname, "..", "public")));
@@ -37,6 +38,20 @@ app.post('/constellations', function(req, res) {
   }
 });
 
+
+app.post('/favorites', function(req, res) {
+  let date = Object.keys(req.body)[0];
+  console.log('FAVORITE', date);
+  return API_CALL.getNasaDataWithDate(date)
+    .then((data) => {
+      console.log('RETRIEVED DATE FOR SAVING TO FAVORITES', data);
+      db.save(data);
+      res.end();
+    })
+    .catch((error) => {
+      console.log('ERROR ON POST SERVER', error)
+    });
+});
 
 
 app.listen(port, () => {
