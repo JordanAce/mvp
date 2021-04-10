@@ -5,14 +5,11 @@ const FavoriteListEntry = function(props) {
     <table>
       <tbody>
         <tr>
-          <th>Stardate</th>
-          <th>Image</th>
+          <td>Stardate: {props.favorite.date}</td>
+          <td>Title: {props.favorite.title}</td>
+          <td>Image: <a href = {props.favorite.url}>Click for Image!</a></td>
         </tr>
-        <tr>
-          <td>{props.favorite.date}</td>
-          <td><a href = {props.favorite.url}>Click for Image!</a></td>
-        </tr>
-      </tbody>
+      </tbody><br></br><br></br>
     </table>
 
   )
