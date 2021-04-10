@@ -53,6 +53,19 @@ app.post('/favorites', function(req, res) {
     });
 });
 
+app.get('/favorites', function(req, res) {
+  return db.retrieve()
+  .then((favorites) => {
+    console.log('FAVORITES RETRIEVED', favorites)
+    res.send(favorites);
+  })
+  .catch((error) => {
+    console.log('ERROR RETRIEVING FAVORITES')
+  })
+  res.end();
+  console.log('RETRIEVING FAVORITES FROM DB');
+})
+
 
 app.listen(port, () => {
   console.log(`Server now listening at http://localhost:${port}`);

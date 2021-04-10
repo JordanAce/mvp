@@ -16,7 +16,6 @@ let Star = mongoose.model('favorites', starSchema);
 
 
 let save = (favoriteData) => {
-  console.log('GETTING TO DATABASE CALL', favoriteData);
   let favoritesTitle = favoriteData.title;
   Star.findOne({title: favoritesTitle}, function (err, response) {
     if (err) {
@@ -38,16 +37,8 @@ let save = (favoriteData) => {
   })
 }
 
-  // favoriteData.create(function(err, result) {
-  //   if (err) {
-  //     console.log('ERROR SAVING TO DATABASE', err)
-  //   } else {
-  //     console.log('SAVED TO DATABASE');
-  //   }
-  // })
-
 let retrieve = () => {
-
+ return Star.find({})
 }
 
 

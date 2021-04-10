@@ -11,6 +11,7 @@ class SearchBar extends React.Component {
     this.search= this.search.bind(this);
     this.onChange= this.newEntry.bind(this);
     this.setFavorite = this.setFavorite.bind(this);
+    this.listFavorites = this.listFavorites.bind(this);
   }
 
 
@@ -30,6 +31,11 @@ class SearchBar extends React.Component {
     this.props.setFavorite(this.state.date);
   }
 
+  listFavorites() {
+    console.log('LISTING FAVORITES')
+    this.props.listFavorites();
+  }
+
 
   render() {
   return(
@@ -43,6 +49,7 @@ class SearchBar extends React.Component {
         onChange = {(event) => this.newEntry(event.target.value)}
     />
       <button onClick = {this.search}>See Past PICS of the DAY</button>
+      <button style ={{float:'right'}} onClick = {this.listFavorites}>List my Favorites!</button>
       <button id = "favorite" style ={{float: 'right'}} onClick = {this.setFavorite}>Set as Favorite</button>
     </div>
 

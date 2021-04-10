@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import BodyParser from 'body-parser';
 import Search from './components/SearchBar.jsx'
 import ConstellationList from './components/ConstellationList.jsx'
+import FavoriteList from './components/FavoriteList.jsx'
 import $ from 'jquery'
 import mongoose from 'mongoose'
 
@@ -13,7 +14,8 @@ class App extends React.Component {
       img: '',
       date:'',
       explanation: '',
-      title: ''
+      title: '',
+      favorites: []
     }
   }
   search(input) {
@@ -55,6 +57,28 @@ class App extends React.Component {
     })
   }
 
+  listFavorites() {
+    let that = this;
+    let myFavorites = [];
+    //GET Request to server which retrieves information from DB
+    $.ajax({
+      type: 'GET',
+      url: ('/favorites'),
+      success: function(favorites) {
+        console.log('RETRIEVED FAVORITES', favorites)
+        myFavorites = favorites;
+        console.log(myFavorites);
+        that.setState({
+         favorites: favorites
+       })
+      },
+      error: function (error) {
+        console.log('ERROR ON RETRIEVING FAVORITES', error)
+      }
+    })
+    console.log(this.state.favorites)
+  }
+
   componentDidMount(input) {
     //on load of screen API Call for Pic of the day
     let that = this;
@@ -83,10 +107,10 @@ class App extends React.Component {
       <div>
         <h1 className = "title">{this.state.title}</h1><br></br>
         <ConstellationList img ={this.state.img} date = {this.state.date} explanation ={this.state.explanation}/>
-        <Search onSearch = {this.search.bind(this)} setFavorite = {this.setFavorite.bind(this)} style = 'align:center'/>
+        <Search onSearch = {this.search.bind(this)} setFavorite = {this.setFavorite.bind(this)} listFavorites = {this.listFavorites.bind(this)} style = 'align:center'/><br></br><br></br>
+        <FavoriteList favoriteList = {this.state.favorites}/>
       </div>
     )  }
-
 }
 
 ReactDOM.render(<App />, document.getElementById("app"))
