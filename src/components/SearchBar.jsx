@@ -22,17 +22,14 @@ class SearchBar extends React.Component {
   }
 
   search() {
-    console.log(`SEARCHING ${this.state.date}`)
     this.props.onSearch(this.state.date);
   }
 
   setFavorite() {
-    console.log(`SETTING AS FAVORITE ${this.state.date}`)
     this.props.setFavorite(this.state.date);
   }
 
   listFavorites() {
-    console.log('LISTING FAVORITES')
     this.props.listFavorites();
   }
 

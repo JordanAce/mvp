@@ -28,7 +28,6 @@ class App extends React.Component {
       url: ('/constellations'),
       data: date,
       success: function(data) {
-        console.log(data)
         that.setState({
           img: data.thumbnail_url || data.url,
           date: data.date,
@@ -59,15 +58,11 @@ class App extends React.Component {
 
   listFavorites() {
     let that = this;
-    let myFavorites = [];
     //GET Request to server which retrieves information from DB
     $.ajax({
       type: 'GET',
       url: ('/favorites'),
       success: function(favorites) {
-        console.log('RETRIEVED FAVORITES', favorites)
-        myFavorites = favorites;
-        console.log(myFavorites);
         that.setState({
          favorites: favorites
        })
@@ -76,20 +71,17 @@ class App extends React.Component {
         console.log('ERROR ON RETRIEVING FAVORITES', error)
       }
     })
-    console.log(this.state.favorites)
   }
 
   componentDidMount(input) {
     //on load of screen API Call for Pic of the day
     let that = this;
     let data = input;
-    console.log(`${data} was Searched`)
       $.ajax({
       type: 'POST',
       url: ('/constellations'),
       data: data,
       success: function(data) {
-        console.log(data)
         that.setState({
           img: data.url,
           date: data.date,
